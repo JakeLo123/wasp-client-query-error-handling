@@ -4,12 +4,5 @@ import { type GetTasks } from "wasp/server/operations";
 
 //Using TypeScript's new 'satisfies' keyword, it will infer the types of the arguments and return value
 export const getTasks = ((_args, context) => {
-  if (!context.user) {
-    throw new HttpError(401);
-  }
-
-  return context.entities.Task.findMany({
-    where: { user: { id: context.user.id } },
-    orderBy: { id: "asc" },
-  });
+  throw new HttpError(500, "Something went wrong");
 }) satisfies GetTasks<void, Task[]>;

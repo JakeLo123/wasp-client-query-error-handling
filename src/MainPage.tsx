@@ -2,7 +2,13 @@ import React, { FormEventHandler, FormEvent } from "react";
 import { type Task } from "wasp/entities";
 import { type AuthUser, getUsername } from "wasp/auth";
 import { logout } from "wasp/client/auth";
-import { createTask, updateTask, deleteTasks, useQuery, getTasks } from "wasp/client/operations";
+import {
+  createTask,
+  updateTask,
+  deleteTasks,
+  useQuery,
+  getTasks,
+} from "wasp/client/operations";
 import waspLogo from "./waspLogo.png";
 
 import "./Main.css";
@@ -12,33 +18,7 @@ export const MainPage = ({ user }: { user: AuthUser }) => {
 
   if (isLoading) return "Loading...";
   if (error) return "Error: " + error;
-
-  const completed = tasks?.filter((task) => task.isDone).map((task) => task.id);
-
-  return (
-    <main>
-      <img src={waspLogo} alt="wasp logo" />
-      {user && user.identities.username && (
-        <h1>
-          {user.identities.username.id}
-          {`'s tasks :)`}
-        </h1>
-      )}
-      <NewTaskForm />
-      {tasks && <TasksList tasks={tasks} />}
-      <div className="buttons">
-        <button
-          className="logout"
-          onClick={() => void deleteTasks(completed ?? [])}
-        >
-          Delete completed
-        </button>
-        <button className="logout" onClick={logout}>
-          Logout
-        </button>
-      </div>
-    </main>
-  );
+  else return "Everything is fine";
 };
 
 function Todo({ id, isDone, description }: Task) {

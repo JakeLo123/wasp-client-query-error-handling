@@ -18,7 +18,6 @@ app errorTesting {
 
 route RootRoute { path: "/", to: MainPage }
 page MainPage {
-  authRequired: true,
   component: import { MainPage } from "@src/MainPage"
 }
 
